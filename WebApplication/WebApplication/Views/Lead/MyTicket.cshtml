@@ -1,0 +1,110 @@
+﻿@model IEnumerable<WebApplication.Models.Ticket>
+@{
+    ViewBag.Title = "My Ticket";
+    Layout = "~/Views/Shared/_MyTicketLayout.cshtml";
+
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="import" />
+
+
+<style>
+    *, body {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    html, body {
+        height: 100%;
+        background-color: #152733;
+        overflow-x: hidden;
+    }
+
+
+    table, th, td {
+        text-align: center;
+    }
+
+    th {
+        white-space: nowrap;
+    }
+
+    .table > tbody > tr > td {
+        vertical-align: middle
+    }
+
+    .cell {
+        white-space: nowrap;
+    }
+
+    .expand-maximum-on-hover:hover {
+        max-width: initial;
+        white-space: normal;
+        text-overflow:initial;
+        text-align:left;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{
+    <h1 style="text-align:center">My Tickets</h1>
+    <br />
+    <br />
+    if (Model != null)
+    {
+        <div class="container-fluid">
+            <table class="table">
+                <tr>
+                    <th style="padding: 40px; font-weight: bolder">Ticket Id</th>
+                    <th style="padding: 40px; font-weight: bolder">Priority</th>
+                    <th style="padding: 40px; font-weight: bolder">Status</th>
+                    <th style="padding: 40px; font-weight: bolder">Ticket Description</th>
+                    <th style="padding: 40px; font-weight: bolder">Response to Ticket</th>
+                    <th style="padding: 40px; font-weight: bolder">Edit</th>
+
+                </tr>
+
+                @foreach (var E1 in Model)
+                {
+
+            <tr class="cell  expand-maximum-on-hover">
+                <td class="" style="padding: 20px;">
+                    @Html.DisplayFor(modelItem => E1.Ticket_Id)
+                </td>
+                <td style="padding: 20px">
+                    @Html.DisplayFor(modelItem => E1.Ticket_Priority)
+                </td>
+                <td style="padding: 20px">
+                    @Html.DisplayFor(modelItem => E1.Ticket_Status)
+                </td>
+                <td style="padding: 20px; max-width:300px;overflow-x:hidden">
+                    @Html.DisplayFor(modelItem => E1.Ticket_Desc)
+                </td>
+                <td>
+                    @{ 
+                        WebApplication.DataLayer.ServiceDeskEntities db = new WebApplication.DataLayer.ServiceDeskEntities();
+                        var resp = db.Responses.Where(x => x.Ticket_Id   == E1.Ticket_Id).Select(x => x.Response_status).FirstOrDefault();
+                    }
+                    @resp
+                </td>
+                <td style="padding: 20px">
+                    @Html.ActionLink(" ", "UpdateTicket", new { tktid = E1.Ticket_Id }, new { @class = "glyphicon glyphicon-pencil" })
+                </td>
+            </tr>
+
+                }
+            </table>
+
+        </div>
+    }
+}
+
+

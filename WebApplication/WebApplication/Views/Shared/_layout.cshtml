@@ -1,0 +1,23 @@
+﻿@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+
+<div class="container-fluid">
+    <nav class="navbar navbar-inverse" style="border-color:white;border:none">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <span class="navbar navbar-brand" style="margin-top:-40px;margin-left:-1200px">WinService Desk</span>
+            </div>
+            <ul class="nav navbar navbar-nav nav-tabs-justified" style="margin-top:-40px">
+            </ul>
+        </div>
+    </nav>
+    @RenderBody()
+</div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/custom")
+    @RenderSection("scripts", required: false)
+

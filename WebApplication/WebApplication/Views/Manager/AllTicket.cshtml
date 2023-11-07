@@ -1,0 +1,82 @@
+@model IEnumerable<WebApplication.Models.Ticket>
+@{
+    ViewBag.Title = "All Ticket";
+    Layout = "~/Views/Shared/_AllTicketLayout.cshtml";
+
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<style>
+    body {
+        background-color: #f8f8f8;
+    }
+
+    table, th, td {
+        text-align: center;
+    }
+
+    td, th, tr {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 25px;
+        padding-right: 25px;
+        text-align: center;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{
+
+    if (Model != null)
+    {
+        <div class="container body-content">
+            <table class="table">
+                <tr>
+                    <th>Ticket id</th>
+                    <th>Priority</th>
+                    <th>Ticket_Description</th>
+                    <th>Dept_Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role_Name</th>
+
+                </tr>
+
+                @foreach (var E1 in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => E1.Ticket_Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => E1.Ticket_Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => E1.Ticket_Desc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => E1.Employee.Department.Dept_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => E1.Employee.Email_Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => E1.Employee.Emp_Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => E1.Employee.Role.Role_Name)
+                        </td>
+                    </tr>
+
+                }
+            </table>
+            @Html.ActionLink("Home", "AdminHomePage")
+        </div>
+    }
+}
+

@@ -1,0 +1,179 @@
+﻿@model IEnumerable<WebApplication.Models.Employee>
+
+@{
+    ViewBag.Title = "Read";
+    Layout = "~/Views/Shared/_ReadLayout.cshtml";
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="import" />
+
+<style>
+    *, body {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    html, body {
+        height: 100%;
+        background-color: #152733;
+        overflow-x: hidden;
+    }
+
+
+    table, th, td {
+        text-align: center;
+    }
+
+    th {
+        white-space: nowrap;
+    }
+
+    .table > tbody > tr > td {
+        vertical-align: middle
+    }
+
+    .cell {
+        white-space: nowrap;
+    }
+
+    .expand-maximum-on-hover:hover {
+        max-width: initial;
+        white-space: normal;
+        text-overflow: initial;
+        text-align: left;
+    }
+</style>
+
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    <br />
+    <h2 style="margin-top:-25px">Employee Details</h2>
+    <br />
+    <br />
+    if (Model != null)
+    {
+        <div class="container-fluid">
+
+            <table class="table">
+                <tr>
+                    <th style="padding: 40px; font-weight: bolder">
+                        Employee Id
+                    </th>
+                    <th style="padding: 40px; font-weight: bolder">
+                        Employee Name
+                    </th>
+                    <th style="padding: 40px; font-weight: bolder">
+                        Department Name
+                    </th>
+                    <th style="padding: 40px; font-weight: bolder">
+                        Group Name
+                    </th>
+                    <th style="padding: 40px; font-weight: bolder">
+                        Email Id
+                    </th>
+                    <th style="padding: 40px; font-weight: bolder">
+                        Actions
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr class="cell  expand-maximum-on-hover">
+                        <td style="padding: 20px;">
+                            @Html.DisplayFor(modelItem => item.Emp_Id)
+                        </td>
+                        <td style="padding: 20px;">
+                            @Html.DisplayFor(modelItem => item.Emp_Name)
+                        </td>
+                        <td style="padding: 20px;">
+                            @Html.DisplayFor(modelItem => item.Department.Dept_Name)
+                        </td>
+                        <td style="padding: 20px;">
+                            @Html.DisplayFor(modelItem => item.Group.Group_Name)
+                        </td>
+                        <td style="padding: 20px; max-width:300px;overflow-x:hidden">
+                            @Html.DisplayFor(modelItem => item.Email_Id)
+                        </td>
+                        <td>
+                            @Html.ActionLink(" ", "Update", new { empid = item.Emp_Id }, new { @class = "glyphicon glyphicon-pencil" })
+                            &nbsp;&nbsp;&nbsp;
+                            @Html.ActionLink(" ", "Delete", new { empid = item.Emp_Id }, new { @class = "glyphicon glyphicon-trash" })
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@*<h2>Employee Details</h2>
+
+    <p style="font:500">
+        @Html.ActionLink("Add an Employee", "AddEmployee")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Employee Id
+            </th>
+            <th>
+                Employee Name
+            </th>
+            <th>
+                Department Name
+            </th>
+            <th>
+                Email Id
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Emp_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Emp_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.Dept_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email_Id)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Update", new { empid = item.Emp_Id }, new { @class = "glyphicon glyphicon-pencil" })
+                    @Html.ActionLink(" ", "Delete", new { empid = item.Emp_Id }, new { @class = "glyphicon glyphicon-trash" })
+                </td>
+            </tr>
+        }
+
+    </table>*@

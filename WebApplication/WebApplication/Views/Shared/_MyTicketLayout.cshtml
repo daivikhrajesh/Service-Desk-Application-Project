@@ -1,0 +1,85 @@
+﻿@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+
+
+<div class="container-fluid">
+    <nav class="navbar navbar-inverse" style="border-color:white;border:none">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <span class="navbar navbar-brand" style="margin-top:-40px">WinService Desk</span>
+            </div>
+            <ul class="nav navbar navbar-nav nav-tabs-justified">
+                <li><a id="len1" class="hoverable" href="HomePage">Home</a></li>
+                <li><a id="len2" class="hoverable" href="CreateTicket">Create Ticket</a></li>
+                <li>
+                    <a id="len3" class="hoverable" data-toggle="dropdown" href="#" style="background-color: #152733; color:white">
+                        My Tickets <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" style="background-color: #152733; width: 180px; font-size: 15px; border-color: darkgray;">
+                        <li><a class="hoverable" href="MyTicket" style=" color:white;background-color: #152733;">My Ticket</a></li>
+                        <li class="divider"></li>
+                        <li><a class="hoverable" href="AssignedTicket" style=" color:white;background-color: #152733;">Assigned Tickets</a></li>
+                    </ul>
+                </li>
+                @if (Session["Role"].ToString() == "Admin" || Session["Role"].ToString() == "Manager")
+                {
+
+                    if (Session["Role"].ToString() == "Admin")
+                    {
+
+                        <li><a id="len4" class="hoverable" href="Department">Department Tickets</a></li>
+
+                    }
+                    else if (Session["Role"].ToString() == "Manager")
+                    {
+
+                        <li><a id="len4" class="hoverable" href="DepartmentTicket">Department Tickets</a></li>
+
+                    }
+                }
+                @if (Session["Role"].ToString() != "Employee")
+                {
+                    if (Session["Role"].ToString() == "Admin" || Session["Role"].ToString() == "Manager")
+                    {
+                        <li><a id="len5" class="hoverable" href="Group">Group Tickets</a></li>
+                    }
+                    else if (Session["Role"].ToString() == "Lead")
+                    {
+                        <li><a id="len5" class="hoverable" href="GroupTicket">Group Tickets</a></li>
+                    }
+
+                }
+                @if (Session["Role"].ToString() == "Admin")
+                {
+
+                    <li>
+                        <a id="len6" class="hoverable" data-toggle="dropdown" href="#" style="background-color: #152733;">
+                            Employee Details <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" style="background-color: #152733; width: 223px; font-size:15px; border-color: darkgray;">
+                            <li><a class="hoverable" href="Read" style=" color:white;background-color: #152733;">Employee Details</a></li>
+                            <li class="divider"></li>
+                            <li><a class="hoverable" href="AddEmployee" style=" color:white;background-color: #152733;">Add Employee</a></li>
+                        </ul>
+                    </li>
+
+                 }
+
+                <li><a id="len7" class="hoverable" href="ProfileDetail">Profile</a></li>
+                <li><a id="len8" class="hoverable" href="Logout">Logout</a></li>
+
+
+            </ul>
+        </div>
+    </nav>
+    @RenderBody()
+</div>
+
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/custom")
+@RenderSection("scripts", required: false)
+
