@@ -1,7 +1,5 @@
 # Service-Desk-Application-Project
 
-# Service Desk Application Readme
-
 ## Overview
 The Service Desk Application is a web-based tool that centralizes query management and streamlines issue resolution for employees. 
 It enhances user experience by connecting various departments and ensuring swift issue resolution to build trust and support company growth.
